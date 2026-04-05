@@ -4,6 +4,7 @@ import { connectDb } from "./config/database.js";
 import authRoute from "./router/auth.route.js"
 import productRoute from "./router/product.route.js"
 import cartRoute from "./router/cart.route.js"
+import maintenanceRoute from "./router/maintenace.route.js"
 
 
 
@@ -19,7 +20,8 @@ connectDb();
 
 app.use("/api", authRoute);
 app.use("/api", productRoute);
-app.use("/api", cartRoute)
+app.use("/api", cartRoute);
+app.use("/api", maintenanceRoute);
 
 
 
