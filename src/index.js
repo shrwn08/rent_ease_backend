@@ -3,6 +3,7 @@ import cors from "cors";
 import { connectDb } from "./config/database.js";
 import authRoute from "./router/auth.route.js"
 import productRoute from "./router/product.route.js"
+import cartRoute from "./router/cart.route.js"
 
 
 
@@ -18,6 +19,7 @@ connectDb();
 
 app.use("/api", authRoute);
 app.use("/api", productRoute);
+app.use("/api", cartRoute)
 
 
 
