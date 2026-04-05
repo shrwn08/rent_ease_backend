@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { connectDb } from "./config/database.js";
+import authRoute from "./router/auth.router.js"
 
 
 
@@ -12,6 +13,9 @@ app.use(cors());
 app.use(express.json());
 
 connectDb();
+
+
+app.use("/api", authRoute)
 
 
 
