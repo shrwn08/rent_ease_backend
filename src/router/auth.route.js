@@ -1,5 +1,5 @@
 import express from "express";
-import { register, login } from "../controllers/auth.controller.js";
+import { register, login, getMe } from "../controllers/auth.controller.js";
 
 
 
@@ -10,7 +10,7 @@ router.post("/auth/register", register);
 router.post("/auth/login", login);
 
 //JWT 
-router.get("/auth/me", ()=>console.log("it will help user to logged in"));
+router.get("/auth/me", getMe);
 
 router.put("/auth/profile", ()=>console.log("to upload users profile"))
 

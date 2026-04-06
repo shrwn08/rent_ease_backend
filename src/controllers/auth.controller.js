@@ -98,3 +98,14 @@ export const login = async () => {
     next(error);
   }
 };
+
+
+export const getMe = async (req, res, next) =>{
+    try {
+        const user = await User.findById(req.user._id);
+
+        res.json({success : true, user})
+    } catch (error) {
+        next(error);
+    }
+}
