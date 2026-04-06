@@ -1,7 +1,7 @@
 import Product from "../models/product.model.js"
 
 
-export const getProduct = async (req, res, next)=>{
+export const getProducts = async (req, res, next)=>{
     try {
         const {category, search, page = 1, limit = 12, sort = '-createdAt'} = req.query;
 
@@ -34,6 +34,18 @@ export const getProduct = async (req, res, next)=>{
             currentPage : Number(page),
             products
         })
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+export const getProduct = async (req, res, next)=>{
+    try {
+        const product =await Product.findById(req.params.id);
+
+        if(!product)
+            return rees.status(404).json({success : false, message : "Product not found"});
     } catch (error) {
         next(error);
     }

@@ -1,14 +1,14 @@
 import express from "express";
-import {getProduct} from "../router/product.route.js"
+import {getProducts, getProduct} from "../router/product.route.js"
 
 
 
 const router = express.Router();
 
 
-router.get("/products", getProduct);
+router.get("/products", getProducts);
 
-router.get("/products/:id", ()=> console.log("product details"));
+router.get("/products/:id", getProduct);
 
 //admin
 router.post("/products", ()=>console.log("product uploaded by the admin") );
