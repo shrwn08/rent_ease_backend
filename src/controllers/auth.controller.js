@@ -109,3 +109,16 @@ export const getMe = async (req, res, next) =>{
         next(error);
     }
 }
+
+
+export const updateProfile = async (req, res, next)=>{
+    try {
+        const {name, address} = req.body;
+
+        const user = await User.findByIdAndUpdate(req.user._id, {name, address}, {new : true, runValidators : true});
+
+        res.json({success : true, user});
+    } catch (error) {
+        next(error);
+    }
+}
