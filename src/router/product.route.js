@@ -1,5 +1,5 @@
 import express from "express";
-import {getProducts, getProduct, createProduct, updateProduct} from "../router/product.route.js"
+import {getProducts, getProduct, createProduct, updateProduct, deletedProduct} from "../router/product.route.js"
 import { authorize, protect } from "../middlewares/auth.middleware.js";
 
 
@@ -16,7 +16,7 @@ router.post("/products", protect, authorize, createProduct );
 
 router.put("/products/:id", protect, authorize, updateProduct );
 
-router.delete("/products/:id", ()=>console.log("admin can delete the product"));
+router.delete("/products/:id", protect, authorize, deletedProduct);
 
 
 
