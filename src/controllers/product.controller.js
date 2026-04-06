@@ -63,3 +63,22 @@ export const createProduct = async (req, res, next) =>{
         next(error);
     }
 }
+
+//Update a product
+
+export const updateProduct = async (req, res, next) =>{
+    try {
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+            new : true,
+            runValidators : true
+        });
+
+        if(!product)
+            return res.status(404).json({success : false, message : "Product not found. "});
+
+        res.json({success : true, message : "product updated successfully.", product});
+
+    } catch (error) {
+        next(error);
+    }
+}
