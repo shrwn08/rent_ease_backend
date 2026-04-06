@@ -55,4 +55,46 @@ export const register = async () => {
   }
 };
 
+export const login = async () => {
+  try {
+    const { email, password } = req.body;
 
+    if (!email || !password)
+      return res
+        .status(400)
+        .json({ success: false, message: "Email and password are required" });
+
+    //find user and include passsword for comparison
+
+    const user = await User.findOne({ email }).select("+password");
+
+    if (!user)
+      return res
+        .status(401)
+        .json({ success: false, message: "Invaild email or password" });
+
+    //check password
+    const isMatch = await user.matchPassword(password);
+
+    if (!isMatch)
+      return res
+        .status(401)
+        .json({ success: false, message: "Invaild email or password" });
+
+    const token = generateToken(user._id);
+
+    res.json({
+      success: true,
+      message: "Login Successful!",
+      token,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
