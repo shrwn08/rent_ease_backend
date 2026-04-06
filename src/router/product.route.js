@@ -1,11 +1,12 @@
 import express from "express";
+import {getProduct} from "../router/product.route.js"
 
 
 
 const router = express.Router();
 
 
-router.get("/products", ()=> console.log("all product list"));
+router.get("/products", getProduct);
 
 router.get("/products/:id", ()=> console.log("product details"));
 
