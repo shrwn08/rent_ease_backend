@@ -1,5 +1,6 @@
 import express from "express";
-import {getProducts, getProduct} from "../router/product.route.js"
+import {getProducts, getProduct, createProduct} from "../router/product.route.js"
+import { authorize, protect } from "../middlewares/auth.middleware.js";
 
 
 
@@ -11,7 +12,7 @@ router.get("/products", getProducts);
 router.get("/products/:id", getProduct);
 
 //admin
-router.post("/products", ()=>console.log("product uploaded by the admin") );
+router.post("/products", protect, authorize, createProduct );
 
 router.put("/products/:id", ()=>console.log("admin can make changes in the product") );
 

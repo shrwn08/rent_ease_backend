@@ -50,3 +50,16 @@ export const getProduct = async (req, res, next)=>{
         next(error);
     }
 }
+
+
+//Create a new product
+
+export const createProduct = async (req, res, next) =>{
+    try {
+        const product = await Product.create(req.body);
+
+        res.status(201).json({success : true, message : "Product created successfully.", product});
+    } catch (error) {
+        next(error);
+    }
+}
