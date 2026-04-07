@@ -1,4 +1,6 @@
 import express from "express";
+import getCart from "../controllers/cart.controller.js";
+import { protect } from "../middlewares/auth.middleware.js";
 
 
 
@@ -6,7 +8,7 @@ const router = express.Router();
 
 //private
 
-router.get("/cart", ()=> console.log("all products list from the cart"));
+router.get("/cart", protect, getCart);
 
 
 
