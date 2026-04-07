@@ -100,3 +100,23 @@ export const getMyOrders = async (req, res, next) => {
     next(error);
   }
 };
+
+
+export const getOrder = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id).populate('items.product');
+ 
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found.' });
+    }
+ 
+    // Ensure user owns this order (unless admin)
+    if (order.user.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+      return res.status(403).json({ success: false, message: 'Access denied.' });
+    }
+ 
+    res.json({ success: true, order });
+  } catch (error) {
+    next(error);
+  }
+};
