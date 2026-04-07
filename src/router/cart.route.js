@@ -1,5 +1,5 @@
 import express from "express";
-import getCart from "../controllers/cart.controller.js";
+import {getCart, addToCart} from "../controllers/cart.controller.js";
 import { protect } from "../middlewares/auth.middleware.js";
 
 
@@ -12,7 +12,7 @@ router.get("/cart", protect, getCart);
 
 
 
-router.post("/cart", ()=>console.log("add/update product in the cart") );
+router.post("/cart", protect, addToCart);
 
 router.put("/cart/:id", ()=>console.log("add the quantity of the product") );
 
