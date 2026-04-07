@@ -1,5 +1,5 @@
 import express from "express";
-import {getCart, addToCart, updateCartItem} from "../controllers/cart.controller.js";
+import {getCart, addToCart, updateCartItem, removeFromCart, clearCart} from "../controllers/cart.controller.js";
 import { protect } from "../middlewares/auth.middleware.js";
 
 
@@ -16,9 +16,9 @@ router.post("/cart", protect, addToCart);
 
 router.put("/cart/:id", protect, updateCartItem);
 
-router.delete("/cart/:id", ()=>console.log("user can delete the product from the cart "));
+router.delete("/cart/:id", protect, removeFromCart);
 
-router.delete("/cart/clear", ()=>console.log("admin can delete the cart "));
+router.delete("/cart/clear", protect, clearCart);
 
 
 
