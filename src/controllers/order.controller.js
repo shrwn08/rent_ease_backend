@@ -142,3 +142,37 @@ export const getAllOrders = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateOrderStatus = async (req, res, next) => {
+  try {
+    const { status } = req.body;
+    const validStatuses = ['pending', 'confirmed', 'delivered', 'active', 'returned', 'cancelled'];
+ 
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status value.' });
+    }
+ 
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    ).populate('user', 'name email');
+ 
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found.' });
+    }
+ 
+    // If returned, restore stock
+    if (status === 'returned') {
+      for (const item of order.items) {
+        await Product.findByIdAndUpdate(item.product, {
+          $inc: { stock: item.quantity },
+        });
+      }
+    }
+ 
+    res.json({ success: true, message: 'Order status updated.', order });
+  } catch (error) {
+    next(error);
+  }
+};

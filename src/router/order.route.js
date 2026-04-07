@@ -15,8 +15,7 @@ router.get("/orders/:id", protect, getOrder);
 router.get("/orders/admin/all", protect, authorize("admin"), getAllOrders
 );
 
-router.put("/orders/:id/status", protect, authorize("admin"), () =>
-  console.log("Update order status "),
+router.put("/orders/:id/status", protect, authorize("admin"), updateOrderStatus
 );
 
 export default router;
