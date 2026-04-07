@@ -100,7 +100,7 @@ export const updateProduct = async (req, res, next) => {
 
 //Delete a product
 
-const deletedProduct = async (req, res, next) => {
+export const deletedProduct = async (req, res, next) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
 

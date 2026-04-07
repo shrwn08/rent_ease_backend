@@ -83,3 +83,20 @@ export const createOrder = async (req, res, next) => {
     next(error);
   }
 };
+
+
+export const getMyOrders = async (req, res, next) => {
+  try {
+    const { status } = req.query;
+    const query = { user: req.user._id };
+    if (status) query.status = status;
+ 
+    const orders = await Order.find(query)
+      .populate('items.product', 'name imageUrl category')
+      .sort('-createdAt');
+ 
+    res.json({ success: true, count: orders.length, orders });
+  } catch (error) {
+    next(error);
+  }
+};
