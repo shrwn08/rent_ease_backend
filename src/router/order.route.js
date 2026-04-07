@@ -1,11 +1,13 @@
 import express from "express";
+import {createOrder} from "../controllers/order.controller.js"
+import { protect } from "../middlewares/auth.middleware.js";
 
 
 
 const router = express.Router();
 
 //private
-router.post("/orders", ()=>console.log("Place order from cart") );
+router.post("/orders", protect, createOrder );
 
 router.get("/orders", ()=> console.log("Get my orders"));
 
