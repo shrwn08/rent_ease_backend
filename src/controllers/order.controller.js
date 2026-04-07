@@ -120,3 +120,25 @@ export const getOrder = async (req, res, next) => {
     next(error);
   }
 };
+
+
+// Admin
+export const getAllOrders = async (req, res, next) => {
+  try {
+    const { status, page = 1, limit = 20 } = req.query;
+    const query = {};
+    if (status) query.status = status;
+ 
+    const total = await Order.countDocuments(query);
+    const orders = await Order.find(query)
+      .populate('user', 'name email phone')
+      .populate('items.product', 'name imageUrl')
+      .sort('-createdAt')
+      .limit(Number(limit))
+      .skip((Number(page) - 1) * Number(limit));
+ 
+    res.json({ success: true, total, count: orders.length, orders });
+  } catch (error) {
+    next(error);
+  }
+};
