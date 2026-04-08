@@ -35,3 +35,16 @@ export const createRequest = async (req, res, next) => {
   }
 };
  
+// Get current user's maintenance requests
+
+const getMyRequests = async (req, res, next) => {
+  try {
+    const requests = await MaintenanceRequest.find({ user: req.user._id })
+      .populate('product', 'name imageUrl')
+      .sort('-createdAt');
+ 
+    res.json({ success: true, count: requests.length, requests });
+  } catch (error) {
+    next(error);
+  }
+};

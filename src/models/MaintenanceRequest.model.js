@@ -19,7 +19,7 @@ const maintenanceSchema = new mongoose.Schema({
     productName : String,
     issueTypes : {
         type : String,
-        enum : ['repair', 'replacement', 'cleaning', 'installation', other],
+        enum : ['repair', 'replacement', 'cleaning', 'installation', 'other'],
         required : true
     },
     description : {

@@ -1,5 +1,5 @@
 import express from "express";
-import createRequest from "../controllers/maintenance.controller.js"
+import {createRequest, getMyRequests} from "../controllers/maintenance.controller.js"
 import { protect } from "../middlewares/auth.middleware.js";
 
 
@@ -9,7 +9,7 @@ const router = express.Router();
 //private
 router.post("/maintenance", protect,createRequest );
 
-router.get("/maintenance", ()=> console.log("My requests "));
+router.get("/maintenance", protect, getMyRequests);
 
 
 
