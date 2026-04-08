@@ -1,6 +1,6 @@
 import express from "express";
-import {createRequest, getMyRequests} from "../controllers/maintenance.controller.js"
-import { protect } from "../middlewares/auth.middleware.js";
+import {createRequest, getMyRequests, getAllRequests, updateRequest} from "../controllers/maintenance.controller.js"
+import { protect, authorize } from "../middlewares/auth.middleware.js";
 
 
 
@@ -14,10 +14,10 @@ router.get("/maintenance", protect, getMyRequests);
 
 
 //admin
-router.get("/maintenance/admin/all", ()=>console.log(" All requests") );
+router.get("/maintenance/admin/all", protect, authorize("admin"), getAllRequests);
 
 
-router.put("/maintenance/:id", ()=>console.log("Update request status "));
+router.put("/maintenance/:id", protect, authorize("admin"),updateRequest);
 
 
 
