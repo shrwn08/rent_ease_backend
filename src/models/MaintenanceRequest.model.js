@@ -43,7 +43,7 @@ const maintenanceSchema = new mongoose.Schema({
     timestamps : true
 });
 
-const MaintenanceRequest = mongoose.model('maintenanceRequest',  maintenanceSchema);
+const MaintenanceRequest = mongoose.model('MaintenanceRequest',  maintenanceSchema);
 
 
 export default MaintenanceRequest;

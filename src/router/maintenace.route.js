@@ -17,7 +17,7 @@ router.get("/maintenance", protect, getMyRequests);
 router.get("/maintenance/admin/all", protect, authorize("admin"), getAllRequests);
 
 
-router.put("/maintenance/:id", protect, authorize("admin"),updateRequest);
+router.put("/maintenance/:id",protect, authorize("admin"), updateRequest);
 
 
 
