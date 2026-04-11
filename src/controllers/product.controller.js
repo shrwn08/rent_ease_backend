@@ -20,7 +20,7 @@ export const getProducts = async (req, res, next) => {
       query.$or = [
         { name: { $regex: search, $option: "i" } },
         { description: { $regex: search, $options: "i" } },
-        { brand: { $regec: search, $options: "i" } },
+        { brand: { $regex: search, $options: "i" } },
       ];
     }
 
@@ -34,7 +34,7 @@ export const getProducts = async (req, res, next) => {
       success: true,
       count: products.length,
       total,
-      totalPage: Match.ceil(total / limit),
+      totalPage: Math.ceil(total / limit),
       currentPage: Number(page),
       products,
     });
@@ -48,7 +48,7 @@ export const getProduct = async (req, res, next) => {
     const product = await Product.findById(req.params.id);
 
     if (!product)
-      return rees
+      return res
         .status(404)
         .json({ success: false, message: "Product not found" });
   } catch (error) {
