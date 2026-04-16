@@ -4,9 +4,11 @@ import Product from "../models/product.model.js";
 
 export const getCart = async (req, res, next) => {
   try {
-    const cart = await Cart.findOne({ user: req.user._id }).popukate(
+    const cart = await Cart.findOne({ user: req.user._id }).populate(
       "items.product",
     );
+
+    console.log(cart);
 
     if (!cart) return res.json({ success: true, cart: { items: [] } });
 
@@ -16,9 +18,11 @@ export const getCart = async (req, res, next) => {
   }
 };
 
-export const addToCart = async (req, res) => {
+export const addToCart = async (req, res,next) => {
   try {
     const { productId, quantity = 1, tenure } = req.body;
+
+
 
     if (!productId)
       return res
@@ -29,6 +33,8 @@ export const addToCart = async (req, res) => {
 
     const product = await Product.findById(productId);
 
+
+
     if (!product) return res.status(404).json({ message: "Product not found" });
 
     if (product.stock < 1)
@@ -37,6 +43,7 @@ export const addToCart = async (req, res) => {
         .json({ success: false, message: "Product is out of stock." });
 
     let cart = await Cart.findOne({ user: req.user._id });
+    console.log(cart);
 
     if (!cart) {
       cart = await Cart.create({
@@ -58,7 +65,7 @@ export const addToCart = async (req, res) => {
       await cart.save();
     }
     await cart.populate("items.product");
-    res.json({ success: true, message: "Item added to cart" });
+    res.json({ success: true, message: "Item added to cart", cart });
   } catch (error) {
     next(error);
   }
@@ -98,7 +105,7 @@ export const removeFromCart = async (req, res, next) => {
     }
  
     cart.items = cart.items.filter(
-      (item) => item.product.toString() !== req.params.productId
+      (item) => item.product.toString() !== req.params.id
     );
  
     await cart.save();

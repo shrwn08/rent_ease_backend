@@ -6,7 +6,7 @@ dotenv.config();
 
 //Generate JWT Token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET);
+  return jwt.sign({ id }, process.env.JWT_SECRET, {expiresIn: "7d"});
 };
 
 export const register = async (req, res, next) => {
@@ -36,7 +36,7 @@ export const register = async (req, res, next) => {
     if (existingUser)
       return res
         .status(400)
-        .json({ success: "false", message: "Email is already registered" });
+        .json({ success: false, message: "Email is already registered" });
 
     //create User
 
@@ -64,6 +64,8 @@ export const login = async (req, res,next) => {
   try {
     const { email, password } = req.body;
 
+
+
     if (!email || !password)
       return res
         .status(400)
@@ -80,7 +82,7 @@ export const login = async (req, res,next) => {
 
     //check password
     const isMatch = await user.matchPassword(password);
-
+    console.log("isMatch", isMatch);
     if (!isMatch)
       return res
         .status(401)

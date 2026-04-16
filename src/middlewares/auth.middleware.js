@@ -11,7 +11,7 @@ export const protect = async (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-    token = req.headers.authorization.spilt(" ")[1];
+    token = req.headers.authorization.split(" ")[1];
   }
 
   if (!token)
@@ -34,7 +34,7 @@ export const protect = async (req, res, next) => {
   } catch (error) {
     return res
       .status(401)
-      .json({ sucess: false, message: "Toke  is invaild or expired" });
+      .json({ success: false, message: "Toke  is invaild or expired" });
   }
 };
 

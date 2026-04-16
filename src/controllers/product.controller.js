@@ -34,7 +34,7 @@ export const getProducts = async (req, res, next) => {
       success: true,
       count: products.length,
       total,
-      totalPage: Math.ceil(total / limit),
+      totalPages: Math.ceil(total / limit),
       currentPage: Number(page),
       products,
     });
@@ -51,6 +51,11 @@ export const getProduct = async (req, res, next) => {
       return res
         .status(404)
         .json({ success: false, message: "Product not found" });
+
+    res.json({
+      success: true,
+      product,
+    });
   } catch (error) {
     next(error);
   }
@@ -104,10 +109,10 @@ export const deletedProduct = async (req, res, next) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
 
-    id(!product);
+    if(!product)
     return res
-      .staus(404)
-      .json({ success: false, message: "Product not foound." });
+      .status(404)
+      .json({ success: false, message: "Product not found." });
 
     res.json({ success: true, message: "Product deleted successfully." });
   } catch (error) {

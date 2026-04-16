@@ -1,6 +1,6 @@
 import Order from "../models/order.model.js";
 import Cart from "../models/cart.model.js";
-import Product from "../models/order.model.js";
+import Product from "../models/product.model.js";
 
 export const createOrder = async (req, res, next) => {
   try {
@@ -72,7 +72,7 @@ export const createOrder = async (req, res, next) => {
       });
     }
 
-    await Cart.findByIdAndUpdate({user : req.user._id},{items : []});
+    await Cart.findOneAndUpdate({user : req.user._id},{items : []});
 
     await order.populate("user", "name email");
 

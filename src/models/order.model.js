@@ -43,7 +43,7 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    deliverDate: {
+    deliveryDate: {
       type: Date,
       required: [true, "Delivery date is required"],
     },
