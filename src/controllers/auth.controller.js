@@ -82,7 +82,9 @@ export const login = async (req, res,next) => {
 
     //check password
     const isMatch = await user.matchPassword(password);
+
     console.log("isMatch", isMatch);
+
     if (!isMatch)
       return res
         .status(401)

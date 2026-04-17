@@ -111,7 +111,7 @@ const sampleProducts = [
         brand: 'ModernHome', rating: 4.2,
     },
 
-    // ─── APPLIANCES ─────────────────────────────────────────────────────────
+    // APPLIANCES
     {
         name: '1.5 Ton 5-Star Split AC',
         category: 'Appliances',
@@ -223,7 +223,7 @@ export const seedDB = async () =>{
         await User.create({
             name: 'Admin User',
             email: 'admin@rentease.com',
-            password: await bcrypt.hash('admin123', salt),
+            password: 'admin123',
             role: 'admin',
 
         });
@@ -244,7 +244,7 @@ export const seedDB = async () =>{
         console.log(`📧 User  : user@rentease.com   |  user123\n`);
         process.exit(0);
 
-    }catch(e){
+    }catch(error){
         console.error('❌ Seed error:', error);
         process.exit(1);
     }

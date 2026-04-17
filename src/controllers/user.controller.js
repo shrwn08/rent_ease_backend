@@ -4,6 +4,8 @@ export const getAllUsers = async (req, res, next) => {
   try {
     const { search, role, page = 1, limit = 20 } = req.query;
 
+
+
     const query = {};
 
     if (role) query.role = role;
@@ -15,7 +17,7 @@ export const getAllUsers = async (req, res, next) => {
     }
 
     const total = await User.countDocuments(query);
-    const users = (await User.find(query)).sort('-createdAt').limit(Number(limit)).skip((Number(page)- 1) * Number(limit));
+    const users = await User.find(query).sort({createdAt: -1}).limit(Number(limit)).skip((Number(page)- 1) * Number(limit));
 
     res.json({
         success : true,
