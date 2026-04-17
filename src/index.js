@@ -15,7 +15,8 @@ import orderRoute from "./router/order.route.js"
 const app = express();
 const PORT = 8080;
 
-app.use(cors({origin  : "*"}));
+app.use(cors({origin  : "*",
+    credentials: true}));
 app.use(express.json());
 
 connectDb();
