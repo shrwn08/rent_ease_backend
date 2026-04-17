@@ -14,35 +14,37 @@ This backend provides APIs for authentication, product management, cart operatio
 ## Folder Structure
 
 ```
-server/
-├── config/
-│   ├── db.js
-│   └── seed.js
-├── controllers/
-│   ├── authController.js
-│   ├── cartController.js
-│   ├── maintenanceController.js
-│   ├── orderController.js
-│   └── productController.js
-├── middleware/
-│   ├── auth.js
-│   └── errorHandler.js
-├── models/
-│   ├── User.js
-│   ├── Product.js
-│   ├── Cart.js
-│   ├── Order.js
-│   └── MaintenanceRequest.js
-├── routes/
-│   ├── auth.js
-│   ├── cart.js
-│   ├── maintenance.js
-│   ├── orders.js
-│   ├── products.js
-│   └── users.js
-├── .env.example
-├── package.json
-└── server.js
+backend/
+    ├──src
+    │  ├── config/
+    │  │   ├── db.js
+    │  │   └── seed.js
+    │  ├── controllers/
+    │  │   ├── authController.js
+    │  │   ├── cartController.js
+    │  │   ├── maintenanceController.js
+    │  │   ├── orderController.js
+    │  │   └── productController.js
+    │  ├── middleware/
+    │  │   ├── auth.js
+    │  │   └── errorHandler.js
+    │  ├── models/
+    │  │   ├── User.js
+    │  │   ├── Product.js
+    │  │   ├── Cart.js
+    │  │   ├── Order.js
+    │  │   └── MaintenanceRequest.js
+    │  ├── routes/
+    │  │   ├── auth.js
+    │  │   ├── cart.js
+    │  │   ├── maintenance.js
+    │  │   ├── orders.js
+    │  │   ├── products.js
+    │  │   └── users.js
+    │  └── index.js
+    ├── .env.example
+    └──  package.json
+    
 ```
 
 ---
@@ -66,7 +68,7 @@ server/
 ### Install dependencies
 
 ```bash
-cd server
+cd backend
 npm install
 ```
 
@@ -79,7 +81,7 @@ cp .env.example .env
 Update `.env` file:
 
 ```env
-PORT=5000
+PORT=8080
 NODE_ENV=development
 MONGO_URI=YOUR_MONGODB_ATLAS_URI
 JWT_SECRET=your_secret_key
@@ -109,7 +111,7 @@ npm start
 Server URL:
 
 ```
-http://localhost:5000
+http://localhost:8080
 ```
 
 ---
